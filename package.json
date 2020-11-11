@@ -4,9 +4,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "echo built!"
+    "build": "echo built!",
+    "auto": "auto",
+    "auto-version": "npm version `auto version` -m 'Bump version to: %s [skip ci]'",
+    "auto-publish": "npm publish --access public && git push --follow-tags --set-upstream origin $branch",
+    "auto-release": "auto changelog && yarn run auto-version && yarn run auto-publish && auto release"
   },
   "author": "Vindhya Raviraj",
   "license": "ISC",
-  "description": "Logs 'Hello, World!' to the console"
+  "description": "Logs 'Hello, World!' to the console",
+  "devDependencies": {
+    "auto": "^10.3.0"
+  }
 }
