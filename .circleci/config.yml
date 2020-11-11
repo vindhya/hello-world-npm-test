@@ -57,10 +57,11 @@ jobs:
           name: Install yarn
           command: npm install -g yarn
       - run: yarn install
-      # - run:
-      #     name: Run build
-      #     command: yarn build:lib && yarn webpack
-      #     no_output_timeout: 10m
+      - run:
+          name: Run build
+          # command: yarn build:lib && yarn webpack
+          command: yarn build
+          no_output_timeout: 10m
 
       - *persist-workspace
   release-publish:
@@ -93,6 +94,7 @@ jobs:
           name: Merge changes back into develop branch
           command: git checkout develop
       - run: git merge main --ff-only
+      - run: git push -u origin develop
 
 workflows:
   version: 2
