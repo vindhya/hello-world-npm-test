@@ -1,0 +1,112 @@
+version: 2.1
+orbs:
+  node: circleci/node@4.1.0
+
+references:
+  persist-workspace: &persist-workspace
+    persist_to_workspace:
+      root: ~/source
+      paths:
+        - .
+
+  attach-workspace: &attach-workspace
+    attach_workspace:
+      at: .
+
+defaults: &defaults
+  working_directory: ~/source
+  # docker:
+  #   - image: circleci/node:latest
+  machine:
+    image: ubuntu-1604:202007-01
+
+jobs:
+  lint-test:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run:
+          name: Install yarn
+          command: npm install -g yarn
+      - run:
+          name: Install dependencies
+          command: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - *persist-workspace
+  build:
+    <<: *defaults
+    steps:
+      - *attach-workspace
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run:
+          name: Install yarn
+          command: npm install -g yarn
+      - run: yarn install
+      # - run:
+      #     name: Run build
+      #     command: yarn build:lib && yarn webpack
+      #     no_output_timeout: 10m
+
+      - *persist-workspace
+  release-publish:
+    <<: *defaults
+    steps:
+      - *attach-workspace
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      
+      - run:
+          name: Setup .env
+          command: echo "GH_TOKEN=${GH_TOKEN}\nNPM_TOKEN=${NPMJS_TOKEN}" > ~/source/.env
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPMJS_TOKEN" > ~/source/.npmrc
+      - run:
+          name: Install yarn
+          command: npm install -g yarn
+      - run: yarn install
+      # - run:
+      #     name: Publish package
+      #     command: npm publish --access public
+      - run:
+          name: Release and publish
+          command: npx auto shipit
+      - run:
+          name: Merge changes back into develop branch
+          command: git checkout develop
+      - run: git merge main --ff-only
+
+workflows:
+  version: 2
+  on-code-change:
+    jobs:
+      - lint-test
+      - build:
+          requires:
+            - lint-test
+      - release-publish:
+          context: QA_ENVIRONMENT
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - main
