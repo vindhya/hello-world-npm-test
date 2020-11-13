@@ -76,10 +76,10 @@ jobs:
       
       - run:
           name: Setup .env
-          command: echo "GH_TOKEN=$GH_TOKEN\nNPM_TOKEN=$NPMJS_TOKEN" > ~/source/.env
+          command: echo "GH_TOKEN=${GH_TOKEN}\nNPM_TOKEN=${NPMJS_TOKEN}" > ~/source/.env
       - run:
           name: Authenticate with registry
-          command: echo "//registry.npmjs.org/:_authToken=$NPMJS_TOKEN" > ~/source/.npmrc
+          command: echo "//registry.npmjs.org/:_authToken=${NPMJS_TOKEN}" > ~/source/.npmrc
       - run:
           name: Install yarn
           command: npm install -g yarn
@@ -90,6 +90,8 @@ jobs:
       - run:
           name: Release and publish
           command: |
+            git config user.email "vindhya.raviraj@gmail.com"
+            git config user.name "Vindhya Raviraj"
             yarn auto-changelog
             yarn auto-version
             yarn auto-publish
