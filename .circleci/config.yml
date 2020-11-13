@@ -87,7 +87,11 @@ jobs:
       - run: yarn install
       - run:
           name: Release and publish
-          command: yarn auto-release
+          command: |
+            yarn auto-changelog
+            yarn auto-version
+            yarn auto-publish
+            yarn auto-releaseit
       - run:
           name: Merge changes back into develop branch
           command: |
