@@ -85,9 +85,6 @@ jobs:
           name: Install yarn
           command: npm install -g yarn
       - run: yarn install
-      # - run:
-      #     name: Publish package
-      #     command: npm publish --access public
       - run:
           name: Release and publish
           command: |
