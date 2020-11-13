@@ -1,3 +1,25 @@
+# v3.0.0 (Fri Nov 13 2020)
+
+#### 💥 Breaking Change
+
+- Test major PR on minor release PR [#35](https://github.com/vindhya/hello-world-npm-test/pull/35) ([@vindhya](https://github.com/vindhya))
+- circle config changes [#33](https://github.com/vindhya/hello-world-npm-test/pull/33) ([@vindhya](https://github.com/vindhya))
+- script changes [#31](https://github.com/vindhya/hello-world-npm-test/pull/31) ([@vindhya](https://github.com/vindhya))
+- major pull request on minor release [#29](https://github.com/vindhya/hello-world-npm-test/pull/29) ([@vindhya](https://github.com/vindhya))
+
+#### 🚀 Enhancement
+
+- Release [#36](https://github.com/vindhya/hello-world-npm-test/pull/36) ([@vindhya](https://github.com/vindhya))
+- Release [#34](https://github.com/vindhya/hello-world-npm-test/pull/34) ([@vindhya](https://github.com/vindhya))
+- Release [#32](https://github.com/vindhya/hello-world-npm-test/pull/32) ([@vindhya](https://github.com/vindhya))
+- Minor Release (with major PR included to develop) [#30](https://github.com/vindhya/hello-world-npm-test/pull/30) ([@vindhya](https://github.com/vindhya))
+
+#### Authors: 1
+
+- Vindhya ([@vindhya](https://github.com/vindhya))
+
+---
+
 # v2.0.1 (Fri Nov 13 2020)
 
 #### 🐛 Bug Fix
