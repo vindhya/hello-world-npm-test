@@ -76,7 +76,7 @@ jobs:
       
       - run:
           name: Setup .env
-          command: echo "GH_TOKEN=${GH_TOKEN}\nNPM_TOKEN=${NPMJS_TOKEN}" > ~/source/.env
+          command: echo -e "GH_TOKEN=${GH_TOKEN}\nNPM_TOKEN=${NPMJS_TOKEN}" > ~/source/.env
       - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=${NPMJS_TOKEN}" > ~/source/.npmrc
