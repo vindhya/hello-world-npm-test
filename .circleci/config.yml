@@ -67,6 +67,9 @@ jobs:
   release-publish:
     <<: *defaults
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "${WRITE_DEPLOY_FINGERPRINT}"
       - *attach-workspace
       - restore_cache:
           keys:
