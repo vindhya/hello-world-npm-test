@@ -93,7 +93,7 @@ jobs:
             yarn auto-changelog
             yarn auto-version
             yarn auto-publish
-            yarn auto-release
+            yarn auto-releaseit
       - run:
           name: Merge changes back into develop branch
           command: git checkout develop
