@@ -1,3 +1,19 @@
+# v2.0.1 (Fri Nov 13 2020)
+
+#### 🐛 Bug Fix
+
+- Patch Release [#28](https://github.com/vindhya/hello-world-npm-test/pull/28) ([@vindhya](https://github.com/vindhya))
+
+#### 📝 Documentation
+
+- circle config changes [#27](https://github.com/vindhya/hello-world-npm-test/pull/27) ([@vindhya](https://github.com/vindhya))
+
+#### Authors: 1
+
+- Vindhya ([@vindhya](https://github.com/vindhya))
+
+---
+
 # v2.0.0 (Fri Nov 13 2020)
 
 #### 💥 Breaking Change
