@@ -89,11 +89,10 @@ jobs:
       #     command: npm publish --access public
       - run:
           name: Release and publish
-          command:
-            yarn auto-changelog
-            yarn auto-version
-            yarn auto-publish
-            yarn auto-release
+          command: yarn auto-changelog
+      - run: yarn auto-version
+      - run: yarn auto-publish
+      - run: yarn auto-releaseit
       - run:
           name: Merge changes back into develop branch
           command: git checkout develop
