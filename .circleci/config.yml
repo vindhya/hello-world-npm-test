@@ -92,6 +92,7 @@ jobs:
           command: |
             git config user.email "vindhya.raviraj@gmail.com"
             git config user.name "Vindhya Raviraj"
+            printenv
             yarn auto-changelog
             yarn auto-version
             yarn auto-publish
